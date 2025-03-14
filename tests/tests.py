@@ -641,6 +641,15 @@ def test_default_storage(s3_storage):
         storage_provider_settings=settings,
     )
 
+@skip_on_windows
+def test_default_storage_without_prefix():
+    run(
+        dpath("test_default_remote"),
+        cores=1,
+        default_storage_provider="s3",
+        storage_provider_settings={"endpoint_url": "http://localhost:9000"},
+    )
+
 
 @skip_on_windows  # OS-independent
 def test_default_storage_local_job(s3_storage):

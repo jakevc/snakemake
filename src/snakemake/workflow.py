@@ -292,7 +292,9 @@ class Workflow(WorkflowExecutorInterface):
                 checksum = hashlib.file_digest(f, "sha256").hexdigest()
 
             prefix = self.storage_settings.default_storage_prefix
-            if prefix:
+            if (not prefix or prefix == self.storage_settings.default_storage_protocol):
+                prefix = "snakemake-workflow-sources/"
+            else:
                 prefix = f"{prefix}/"
             query = f"{prefix}snakemake-workflow-sources.{checksum}.tar.xz"
 

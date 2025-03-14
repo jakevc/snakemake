@@ -29,18 +29,20 @@ class SpawnedJobArgsFactory:
             self.workflow.storage_registry.default_storage_provider is not None
         )
         if has_default_storage_provider:
-            return join_cli_args(
-                [
+            cli_args = [
+                format_cli_arg(
+                    "--default-storage-provider",
+                    self.workflow.storage_settings.default_storage_provider,
+                )
+            ]
+            if self.workflow.storage_settings.default_storage_prefix:
+                cli_args.append(
                     format_cli_arg(
                         "--default-storage-prefix",
                         self.workflow.storage_settings.default_storage_prefix,
-                    ),
-                    format_cli_arg(
-                        "--default-storage-provider",
-                        self.workflow.storage_settings.default_storage_provider,
-                    ),
-                ]
-            )
+                    )
+                )
+            return join_cli_args(cli_args)
         else:
             return ""
 

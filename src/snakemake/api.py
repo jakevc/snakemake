@@ -175,7 +175,6 @@ class SnakemakeApi(ApiBase):
     ):
         if (
             storage_settings.default_storage_provider is None
-            or storage_settings.default_storage_prefix is None
         ):
             raise ApiError(
                 "A default storage provider and prefix has to be set for deployment of "
@@ -513,14 +512,12 @@ class DAGApi(ApiBase):
             not in self.workflow_api.storage_settings.shared_fs_usage
             and (
                 not self.workflow_api.storage_settings.default_storage_provider
-                or self.workflow_api.storage_settings.default_storage_prefix is None
             )
             and executor_plugin.common_settings.can_transfer_local_files is False
         ):
             raise ApiError(
                 "If no shared filesystem is assumed for input and output files, a "
-                "default storage provider (--default-storage-provider) and "
-                "default storage prefix (--default-storage-prefix) has to be set. "
+                "default storage provider (--default-storage-provider) has to be set. "
                 "See https://snakemake.github.io/snakemake-plugin-catalog for possible "
                 "storage provider plugins."
             )
