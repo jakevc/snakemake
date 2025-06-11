@@ -12,6 +12,11 @@ def rule_item_factory(name: str):
         def inner(_wildcards, threads):
             return threads
 
+    elif name == "rulename":
+
+        def inner(_wildcards, _input, _output, _params, _resources, _log, rule):
+            return rule.name
+
         return inner
     return RuleItemProxy(name)
 
