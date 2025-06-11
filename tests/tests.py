@@ -386,6 +386,10 @@ def test_ruledeps():
     run(dpath("test_ruledeps"))
 
 
+def test_rulename():
+    run(dpath("test_rulename"))
+
+
 @connected
 def test_url_include():
     run(dpath("test_url_include"))
